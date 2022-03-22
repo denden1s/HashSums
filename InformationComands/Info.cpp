@@ -4,6 +4,8 @@ using namespace std;
 
 class Info 
 {
-  //метод message
-  //класс абстрактный
+protected:
+  string message;
+public:
+  virtual void Show() = 0;
 };

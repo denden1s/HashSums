@@ -5,10 +5,14 @@ using namespace std;
 //абстрактный класс
 class HashFunction
 {
-//класс абстрактный
-// файл для которого нужна проверка
-// текущий хеш сумма
-//два метода:
-// вывод хеш суммы
-//вывод логического да или нет, параметр строка со сравниваемой суммой
+protected: 
+  string hash;//нужно ли???
+  //сам файл (возможно указатель)
+public:
+  HashFunction(string path)
+  {
+    //инициализация файла
+  }
+  virtual string GetHashSum() = 0;
+  virtual bool IsEquals(string validHash) = 0; 
 };
