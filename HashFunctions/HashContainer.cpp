@@ -6,8 +6,12 @@
 class HashContainer : public BaseContainer<HashFunction>
 {
   public:
-  HashContainer(string typeName, string exMessage) : BaseContainer(typeName, exMessage)
+  HashContainer() : BaseContainer()
   {
     //инициализация списка функций
+  }
+  void SetPath(string path)
+  {
+    currentObject->SetPath(path);
   }
 };

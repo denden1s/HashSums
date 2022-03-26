@@ -1,7 +1,16 @@
 #include<iostream>
 #include<string>
-#include"Exceptions/Exception.cpp"
+#include"Exception.cpp"
+#include"InformationComands/InfoContainer.cpp"
+#include"HashFunctions/HashContainer.cpp"
 using namespace std;
+
+InfoContainer comands;
+HashContainer hashes;//!имя нужно более информативнее 
+string path;
+string hashMethod;
+string currentHashSum;
+
 
 void ArgsCountValidation(int args)
 {
@@ -11,11 +20,14 @@ void ArgsCountValidation(int args)
 
 void GetHash(string path, string method)
 {
-  //...
+  HashFunction *currentMethod = hashes.GetObject();
+  currentMethod->SetPath(path);
+  cout << "Hash: "<< currentMethod->GetHashSum() << endl;;
 }
 void ViewInfo(string comandName)
 {
-  //...
+  Info *currentComand = comands.GetObject();
+  currentComand->Show();//заменить на конкретную (имя)
 }
 
 void CompareHashes(string validHash, string path, string method)
@@ -29,14 +41,24 @@ int Main(int args, char** params)
   {
     //нужна валидация, т.к. параметры могут быть переданы вразброс
     //для каждого способа валидация своя (или можно метод с параметром по умолчанию)
+    //? есть ли смысл валидации если я обрабатываю exception-ы
+    //пусть сначала будет путь, потом метод, а потом уже хеш сумма
+    // 1 - path
+    // 2 - method
+    // 3 - hash
     ArgsCountValidation(args);
     switch (args)
     {
     case 4:
-      //CompareHashes()
+      path = params[1];
+      hashMethod = params[2];
+      currentHashSum = params[3];
+      CompareHashes(currentHashSum, path, hashMethod);
       break;
     case 3:
-      //GetHash();
+      path = params[1];
+      hashMethod = params[2];
+      GetHash(path, hashMethod);
       break;
     case 2: 
       ViewInfo(params[1]);
@@ -45,9 +67,6 @@ int Main(int args, char** params)
       throw Exception("Неизвестная ошибка");
       break;
     }
-    //строка алгоритм хеширования
-    //строка расположение файла
-    //строка хеш суммы 
 
     //контейнер информирующих команд
     //контейнер хеш функций

@@ -1,5 +1,7 @@
 #include<iostream>
 #include<string>
+#include <typeinfo>
+#include<vector>
 #include"Exception.cpp"
 using namespace std;
 
@@ -8,9 +10,6 @@ class BaseContainer
 {
 
 private:
-  string name;
-  string exceptionMessage;
-  T currentObject = NULL; 
   void Find()
   {
     //если не нашел thow ex
@@ -21,13 +20,17 @@ private:
   }
 protected:
   //список или вектор элементов (задаётся заранее)
+  vector<T*> list; //!можно более информативно
+  T* currentObject = NULL; 
 public:
-  BaseContainer(string typeName, string exMessage)
+  BaseContainer()
   {
-    name = typeName;
-    exceptionMessage = exMessage;
   }
-  T GetObject()
+  virtual ~BaseContainer()
+  {
+
+  }
+  virtual T* GetObject()
   { 
     Find();
     return currentObject;
