@@ -15,6 +15,7 @@ public:
   }
   void Show()
   {
+    cout << "Error info: " << message << endl;
     //можно вызвать справочную информацию + сообщение об ошибке
   }
 };

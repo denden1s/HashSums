@@ -4,6 +4,7 @@
 #include"../BaseContainer.cpp"
 #include"Help.cpp"
 #include"Info.cpp"
+#include"Version.cpp"
 
 class InfoContainer : public BaseContainer<Info>
 {
@@ -12,5 +13,6 @@ class InfoContainer : public BaseContainer<Info>
   {
     //инициализация списка функций
     list.push_back(new Help());
+    list.push_back(new Version());
   }
 };

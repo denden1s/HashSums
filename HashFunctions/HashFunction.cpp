@@ -1,21 +1,29 @@
 #pragma once
 #include<iostream>
 #include<string>
+#include<fstream>
 using namespace std;
 
 //абстрактный класс
 class HashFunction
 {
 private:
-  string path;
+  
 protected: 
   string hash;//нужно ли???
-
+  string path;
+bool IsEmpty()
+{
+  ifstream fileToRead(path);
+  return !fileToRead;
+}
   //сам файл (возможно указатель)
 public:
+  HashFunction(){}
   HashFunction(string path)
   {
     //инициализация файла
+    this->path = path;
   }
   virtual ~HashFunction()
   {

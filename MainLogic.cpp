@@ -13,7 +13,6 @@ string path;
 string hashMethod;
 string currentHashSum;
 
-
 void ArgsCountValidation(int args)
 {
   if(args > 4 || args < 2)
@@ -24,8 +23,10 @@ void GetHash(string path, string method)
 {
   HashFunction *currentMethod = hashes.GetObject(method);
   currentMethod->SetPath(path);
-  cout << "Hash: "<< currentMethod->GetHashSum() << endl;;
+  string result = currentMethod->GetHashSum();
+  cout << "Hash: "<<  result << endl;
 }
+
 void ViewInfo(string comandName)
 {
   Info *currentComand = comands.GetObject(comandName);
@@ -34,7 +35,7 @@ void ViewInfo(string comandName)
 
 void CompareHashes(string validHash, string path, string method)
 {
-
+  //...
 }
 
 int main(int args, char** params)
@@ -66,31 +67,17 @@ int main(int args, char** params)
       ViewInfo(params[1]);
       break;
     default:
-      throw Exception("Неизвестная ошибка");
+      throw Exception("Uncought error");
       break;
-    }
-
-    //контейнер информирующих команд
-    //контейнер хеш функций
-    //указатель на hash function 
-    //указатель на info 
-    
-    // проверить args if args > 4 or < 2 throw ex
-    // if args == 4  сравнивать хеши
-    // if args == 3 вычислить хеш
-    // if args == 2 - доп. команда
-    
+    }    
   }
   catch(Exception ex)
   {
-    //
     ex.Show();
-    cout << "ex" << endl;
   }
   catch(...)
   {
-    cout << "Неожиданная ошибка" << endl;
-  }
-  
+    cout << "Uncought error" << endl;
+  } 
   return 0;
 }
