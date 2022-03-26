@@ -1,3 +1,4 @@
+#pragma once
 #include<iostream>
 #include<string>
 using namespace std;
@@ -8,5 +9,4 @@ protected:
   string message;
 public:
   virtual void Show() = 0;
-  virtual ~Info() = 0;
 };

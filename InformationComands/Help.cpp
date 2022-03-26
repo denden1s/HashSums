@@ -1,3 +1,4 @@
+#pragma once
 #include<iostream>
 #include<string>
 #include"Info.cpp"
@@ -8,7 +9,7 @@ class Help : public Info
 public:
   void Show()
   { 
-    message = "help";
+    message = "Команда help в данный момент находится в разработке";
     cout << message << endl;
   }
   ~Help()

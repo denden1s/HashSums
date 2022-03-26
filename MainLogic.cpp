@@ -1,5 +1,7 @@
+#pragma
 #include<iostream>
 #include<string>
+#include<typeinfo>
 #include"Exception.cpp"
 #include"InformationComands/InfoContainer.cpp"
 #include"HashFunctions/HashContainer.cpp"
@@ -20,13 +22,13 @@ void ArgsCountValidation(int args)
 
 void GetHash(string path, string method)
 {
-  HashFunction *currentMethod = hashes.GetObject();
+  HashFunction *currentMethod = hashes.GetObject(method);
   currentMethod->SetPath(path);
   cout << "Hash: "<< currentMethod->GetHashSum() << endl;;
 }
 void ViewInfo(string comandName)
 {
-  Info *currentComand = comands.GetObject();
+  Info *currentComand = comands.GetObject(comandName);
   currentComand->Show();//заменить на конкретную (имя)
 }
 
@@ -35,7 +37,7 @@ void CompareHashes(string validHash, string path, string method)
 
 }
 
-int Main(int args, char** params)
+int main(int args, char** params)
 {
   try
   {
@@ -82,6 +84,8 @@ int Main(int args, char** params)
   catch(Exception ex)
   {
     //
+    ex.Show();
+    cout << "ex" << endl;
   }
   catch(...)
   {
