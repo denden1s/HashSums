@@ -7,11 +7,20 @@ using namespace std;
 //абстрактный класс
 class HashFunction
 {
-private:
-  
 protected: 
   string hash;//нужно ли???
   string path;
+  void ToLower()
+  {
+    for (size_t i = 0; i < hash.size(); i++)
+    {
+      bool isNum = false;
+      for (size_t j = 0; j < 9; j++)
+        isNum = hash[i] == j;
+      if(!isNum)
+        hash[i] = tolower(hash[i]);
+    }
+  }
 bool IsEmpty()
 {
   ifstream fileToRead(path);
