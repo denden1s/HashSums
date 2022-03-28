@@ -4,14 +4,14 @@
 #include"HashFunction.cpp"
 #include<fstream>
 #include<cstring>
+#include "openssl/sha.h"
 #include"../Exception.cpp"
-#include<openssl/md5.h> 
 #include<sstream> 
 #include<iomanip> 
 using namespace std;
 #define BUFFSIZE 16384 
 
-class Md5 : public HashFunction
+class Sha256 : public HashFunction
 {
 public:
   string GetHashSum()
@@ -22,34 +22,27 @@ public:
     file.open(path, ios_base::binary);
     if(!IsEmpty())
     {
-      //md5 logic
       char buffer[BUFFSIZE]; 
-      unsigned char digest[MD5_DIGEST_LENGTH];    
+      unsigned char digest[SHA256_DIGEST_LENGTH];    
       stringstream ss; 
-      MD5_CTX md5Context; 
-      MD5_Init(&md5Context); 
+      SHA256_CTX sha256Context; 
+      SHA256_Init(&sha256Context); 
       while (file.good())  
       { 
         file.read(buffer, BUFFSIZE); 
-        MD5_Update(&md5Context, buffer, file.gcount());  
+        SHA256_Update(&sha256Context, buffer, file.gcount());  
       } 
       file.close(); 
-      int res = MD5_Final(digest, &md5Context); 
+      int res = SHA256_Final(digest, &sha256Context); 
       // set up stringstream format 
       ss << std::hex << std::uppercase << std::setfill('0'); 
       for(unsigned char uc: digest) 
         ss << std::setw(2) << (int)uc; 
       hash = ss.str(); 
       //приведение строки к нижнему регистру
-     hash = ToLower(hash);
+      hash = ToLower(hash);
     }
     else throw Exception("Cant open file");
    return hash;
   }
-/*  bool IsEquals(string validHash)
-  {
-    hash = ToLower(GetHashSum());
-    validHash = ToLower(validHash);
-    return hash == validHash;
-  }*/
 };

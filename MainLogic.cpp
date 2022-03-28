@@ -35,7 +35,13 @@ void ViewInfo(string comandName)
 
 void CompareHashes(string validHash, string path, string method)
 {
-  //...
+  HashFunction *currentMethod = hashes.GetObject(method);
+  currentMethod->SetPath(path);
+  bool result  = currentMethod->IsEquals(validHash);
+  if(result)
+    cout << "Hashes are equals"<<endl;
+  else
+    cout << "Hashes not equals"<<endl;
 }
 
 int main(int args, char** params)

@@ -10,16 +10,17 @@ class HashFunction
 protected: 
   string hash;//нужно ли???
   string path;
-  void ToLower()
+  string ToLower(string data)
   {
-    for (size_t i = 0; i < hash.size(); i++)
+    for (size_t i = 0; i < data.size(); i++)
     {
       bool isNum = false;
       for (size_t j = 0; j < 9; j++)
-        isNum = hash[i] == j;
+        isNum = data[i] == j;
       if(!isNum)
-        hash[i] = tolower(hash[i]);
+        data[i] = tolower(data[i]);
     }
+    return data;
   }
 bool IsEmpty()
 {
@@ -39,7 +40,12 @@ public:
 
   }
   virtual string GetHashSum() = 0;
-  virtual bool IsEquals(string validHash) = 0; 
+  virtual bool IsEquals(string validHash)
+  {
+    hash = ToLower(GetHashSum());
+    validHash = ToLower(validHash);
+    return hash == validHash;
+  }
   void SetPath(string path)
   {
     this->path = path;
