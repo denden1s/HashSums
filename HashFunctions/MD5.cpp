@@ -19,7 +19,7 @@ public:
     const char* _path = path.c_str();
    string data;
    ifstream file;
-    file.open(path, ios_base::binary);//!нет разницы бинарный или нет файл
+    file.open(path, ios_base::binary);
     if(!IsEmpty())
     {
       //md5 logic
