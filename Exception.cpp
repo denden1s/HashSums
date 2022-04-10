@@ -1,13 +1,14 @@
 #pragma once
 #include<iostream>
 #include<string>
+#include"InformationComands/Help.cpp"
 using namespace std;
 
 class Exception
 {
 private:
   string message;
-  //объект help
+  Help help;
 public:
   Exception(string msg)
   {
@@ -16,6 +17,6 @@ public:
   void Show()
   {
     cout << "Error info: " << message << endl;
-    //можно вызвать справочную информацию + сообщение об ошибке
+    help.Show();
   }
 };

@@ -1,13 +1,13 @@
 #pragma once
 #include<iostream>
 #include<string>
-#include"HashFunction.cpp"
 #include<fstream>
 #include<cstring>
-#include"../Exception.cpp"
-#include<openssl/md5.h> 
 #include<sstream> 
 #include<iomanip> 
+#include<openssl/md5.h> 
+#include"../Exception.cpp"
+#include"HashFunction.cpp"
 using namespace std;
 #define BUFFSIZE 16384 
 
@@ -22,7 +22,7 @@ public:
     file.open(path, ios_base::binary);
     if(!IsEmpty())
     {
-      //md5 logic
+      //логика алгоритма md5
       char buffer[BUFFSIZE]; 
       unsigned char digest[MD5_DIGEST_LENGTH];    
       stringstream ss; 
@@ -35,21 +35,14 @@ public:
       } 
       file.close(); 
       int res = MD5_Final(digest, &md5Context); 
-      // set up stringstream format 
+      // приведение к формату string stream
       ss << std::hex << std::uppercase << std::setfill('0'); 
       for(unsigned char uc: digest) 
         ss << std::setw(2) << (int)uc; 
       hash = ss.str(); 
-      //приведение строки к нижнему регистру
-     hash = ToLower(hash);
+      hash = ToLower(hash);
     }
     else throw Exception("Cant open file");
    return hash;
   }
-/*  bool IsEquals(string validHash)
-  {
-    hash = ToLower(GetHashSum());
-    validHash = ToLower(validHash);
-    return hash == validHash;
-  }*/
 };

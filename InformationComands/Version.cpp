@@ -9,7 +9,7 @@ class Version : public Info
 public:
   void Show()
   { 
-    message = "Version: 0.0.1";
+    message = "Version: 1.0.1";
     cout << message << endl;
   }
 };

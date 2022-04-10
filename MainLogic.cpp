@@ -8,7 +8,7 @@
 using namespace std;
 
 InfoContainer comands;
-HashContainer hashes;//!имя нужно более информативнее 
+HashContainer hashes;
 string path;
 string hashMethod;
 string currentHashSum;
@@ -16,7 +16,7 @@ string currentHashSum;
 void ArgsCountValidation(int args)
 {
   if(args > 4 || args < 2)
-    throw Exception("Передано недостаточное количество аргументов");
+    throw Exception("Uncorrect count of arguments");
 }
 
 void GetHash(string path, string method)
@@ -48,13 +48,6 @@ int main(int args, char** params)
 {
   try
   {
-    //нужна валидация, т.к. параметры могут быть переданы вразброс
-    //для каждого способа валидация своя (или можно метод с параметром по умолчанию)
-    //? есть ли смысл валидации если я обрабатываю exception-ы
-    //пусть сначала будет путь, потом метод, а потом уже хеш сумма
-    // 1 - path
-    // 2 - method
-    // 3 - hash
     ArgsCountValidation(args);
     switch (args)
     {

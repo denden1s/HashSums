@@ -1,13 +1,14 @@
 #pragma once
 #include<iostream>
 #include<string>
-#include"HashFunction.cpp"
 #include<fstream>
+#include<sstream> 
+#include<iomanip> 
 #include<cstring>
 #include "openssl/sha.h"
 #include"../Exception.cpp"
-#include<sstream> 
-#include<iomanip> 
+#include"HashFunction.cpp"
+
 using namespace std;
 #define BUFFSIZE 16384 
 
@@ -34,12 +35,10 @@ public:
       } 
       file.close(); 
       int res = SHA256_Final(digest, &sha256Context); 
-      // set up stringstream format 
       ss << std::hex << std::uppercase << std::setfill('0'); 
       for(unsigned char uc: digest) 
         ss << std::setw(2) << (int)uc; 
       hash = ss.str(); 
-      //приведение строки к нижнему регистру
       hash = ToLower(hash);
     }
     else throw Exception("Cant open file");

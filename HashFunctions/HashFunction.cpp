@@ -2,13 +2,13 @@
 #include<iostream>
 #include<string>
 #include<fstream>
+#include<stdio.h>
 using namespace std;
 
-//абстрактный класс
 class HashFunction
 {
 protected: 
-  string hash;//нужно ли???
+  string hash;
   string path;
   string ToLower(string data)
   {
@@ -27,24 +27,19 @@ bool IsEmpty()
   ifstream fileToRead(path);
   return !fileToRead;
 }
-  //сам файл (возможно указатель)
 public:
   HashFunction(){}
   HashFunction(string path)
   {
-    //инициализация файла
+    //инициализация пути файла
     this->path = path;
-  }
-  virtual ~HashFunction()
-  {
-
   }
   virtual string GetHashSum() = 0;
   virtual bool IsEquals(string validHash)
   {
     hash = ToLower(GetHashSum());
     validHash = ToLower(validHash);
-    return hash == validHash;
+    return hash == validHash;    
   }
   void SetPath(string path)
   {
